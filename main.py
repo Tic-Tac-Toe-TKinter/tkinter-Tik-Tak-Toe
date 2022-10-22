@@ -174,8 +174,8 @@ if __name__ == '__main__':
     game = [[0, 0, 0],
             [0, 0, 0],  # game scores organized in a grid
             [0, 0, 0]]
-    XImage = PhotoImage(file="X.png")
-    OImage = PhotoImage(file="O.png")
+    XImage = PhotoImage(file="Images/X.png")
+    OImage = PhotoImage(file="Images/O.png")
     images = [OImage, XImage]
     # label = root.Label(background="black")
     turn = 1
