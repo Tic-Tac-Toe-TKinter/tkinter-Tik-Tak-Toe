@@ -10,7 +10,6 @@
 ***
 # Modules
 * TKinter
-* Pillow
 ***
 # Created By
 * Oleksandr Lisnytskyi
