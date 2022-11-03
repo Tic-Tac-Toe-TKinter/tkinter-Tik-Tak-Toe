@@ -38,7 +38,6 @@ def bot_second_level(lst1: list[list[int]], userValue: int, font_size: font) -> 
     :param userValue: value to play for as computer
     :return: list with added value(val) to any row or column
     """
-    botValue = userValue * -1
 
     # Check if all cells is occupied, if yes exit program
     if all([all(x) for x in game]):
@@ -82,14 +81,17 @@ def bot_second_level(lst1: list[list[int]], userValue: int, font_size: font) -> 
     randVal = randint(0, 2)
     if sum(lst1[0]) == 0:
         lst1[0][randVal] = botValue
+        print("Random first row")
         changer(botValue, 0, randVal, font_size)
         return 1
     elif sum(lst1[1]) == 0:
         lst1[1][randVal] = botValue
+        print("Random second row")
         changer(botValue, 1, randVal, font_size)
         return 1
     elif sum(lst1[2]) == 0:
         lst1[2][randVal] = botValue
+        print("Random third row")
         changer(botValue, 0, randVal, font_size)
         return 1
 
@@ -101,20 +103,19 @@ def bot_second_level(lst1: list[list[int]], userValue: int, font_size: font) -> 
         else:
             lst1[x][y] = botValue
             changer(botValue, x, y, font_size)
+
             return 1
 
 
-def bot_first_level(lst1: list[list[int]], userValue: int, font_size: font) -> int | None:
+def bot_first_level(lst1: list[list[int]], font_size: font) -> int | None:
     """
     Function for player to play against computer with easy level. Input argument is list of lists of integers
     that represents all X: 1 and O: 2 on the board. It returns the list with new value of val
 
     :param font_size: styles of font to use in button
     :param lst1: list of lists of integers(0: empty, 1: X, 2: O) that represents the game board
-    :param userValue: value the user use to play
     :return: None
     """
-    botValue = 1 if userValue == -1 else -1
 
     while True:
         if all([all(i) for i in game]):
@@ -176,12 +177,16 @@ if __name__ == '__main__':
     OImage = PhotoImage(file="Images/O.png")
     images = [OImage, XImage]
     # label = root.Label(background="black")
-    turn = 1
+    turn = -1
+    botValue = turn * -1
     myFont = font.Font(size=20)
-    gameMode = 'bot'  # input("Choose the game mode to play(Bot/Player): ")
+    gameMode = 'player'  # input("Choose the game mode to play(Bot/Player): ")
+    counter = 0
 
     if gameMode == "bot":
         difficultyLevel = 2  # input("choose difficulty level(1/2): ")
+    x = randint(0, 2)
+    y = randint(0, 2)
     for r in range(3):
         for c in range(3):
             match gameMode.lower():
@@ -211,6 +216,7 @@ if __name__ == '__main__':
                         win_check()
 
                 case "bot":
+
                     def tkk(x=labels[r][c]):
                         global game
                         global turn
@@ -229,7 +235,7 @@ if __name__ == '__main__':
 
                         if difficultyLevel == 1:
 
-                            if bot_first_level(game, turn, myFont) is None and win_check() is None:
+                            if bot_first_level(game, myFont) is None and win_check() is None:
                                 showinfo(message="Draw")
                                 exit(1)
                         else:
@@ -238,12 +244,18 @@ if __name__ == '__main__':
                                 showinfo(message="Draw")
                                 exit(1)
                         win_check()
+
                         # cell = str(row_1) + str(column_1)
                         # print(cell)
                         # print(game)
+            if turn == 1 and counter == 0 and r == x and c == y:
+                button = Button(root, padx=10,
+                                text=labels[r][c], image=images[0], height=180, width=180)
+                game[r][c] = 1
+            else:
+                button = Button(root, width=10, height=5, padx=10,
+                                text=labels[r][c], command=tkk)
 
-            button = Button(root, width=10, height=5, padx=10,
-                            text=labels[r][c], command=tkk)
             button['font'] = myFont
             button.grid(row=r, column=c)
 
