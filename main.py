@@ -79,17 +79,17 @@ def bot_second_level(lst1: list[list[int]], userValue: int, font_size: font) -> 
 
     # place val to random place in this row if it is empty
     randVal = randint(0, 2)
-    if sum(lst1[0]) == 0:
+    if lst1[0] == [0, 0, 0]:
         lst1[0][randVal] = botValue
         print("Random first row")
         changer(botValue, 0, randVal, font_size)
         return 1
-    elif sum(lst1[1]) == 0:
+    elif lst1[1] == [0, 0, 0]:
         lst1[1][randVal] = botValue
         print("Random second row")
         changer(botValue, 1, randVal, font_size)
         return 1
-    elif sum(lst1[2]) == 0:
+    elif lst1[2] == [0, 0, 0]:
         lst1[2][randVal] = botValue
         print("Random third row")
         changer(botValue, 0, randVal, font_size)
@@ -180,13 +180,14 @@ if __name__ == '__main__':
     turn = -1
     botValue = turn * -1
     myFont = font.Font(size=20)
-    gameMode = 'player'  # input("Choose the game mode to play(Bot/Player): ")
+    gameMode = 'bot'  # input("Choose the game mode to play(Bot/Player): ")
     counter = 0
 
     if gameMode == "bot":
         difficultyLevel = 2  # input("choose difficulty level(1/2): ")
     x = randint(0, 2)
     y = randint(0, 2)
+
     for r in range(3):
         for c in range(3):
             match gameMode.lower():
@@ -248,15 +249,18 @@ if __name__ == '__main__':
                         # cell = str(row_1) + str(column_1)
                         # print(cell)
                         # print(game)
-            if turn == 1 and counter == 0 and r == x and c == y:
+
+            if turn == -1 and counter == 0 and r == x and c == y:
                 button = Button(root, padx=10,
-                                text=labels[r][c], image=images[0], height=180, width=180)
+                                text=labels[r][c], image=images[1], height=180, width=180)
                 game[r][c] = 1
+                counter += 1
             else:
                 button = Button(root, width=10, height=5, padx=10,
                                 text=labels[r][c], command=tkk)
 
             button['font'] = myFont
+
             button.grid(row=r, column=c)
 
     # print(frame.grid(row=1, column=2).getattr())
