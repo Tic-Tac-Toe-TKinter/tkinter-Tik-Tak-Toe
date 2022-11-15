@@ -92,7 +92,7 @@ def bot_second_level(lst1: list[list[int]], userValue: int, font_size: font) -> 
     elif lst1[2] == [0, 0, 0]:
         lst1[2][randVal] = botValue
         print("Random third row")
-        changer(botValue, 2, randVal, font_size)
+        changer(botValue, 0, randVal, font_size)
         return 1
 
     while True:
@@ -233,7 +233,7 @@ if __name__ == '__main__':
                             column_1] = turn  # connecting the number of the button to the element in the list of lists
 
                         changer(turn, row_1, column_1, myFont)
-                        print(game)
+
                         if difficultyLevel == 1:
 
                             if bot_first_level(game, myFont) is None and win_check() is None:
@@ -252,12 +252,12 @@ if __name__ == '__main__':
 
             if turn == -1 and counter == 0 and r == x and c == y:
                 button = Button(root, padx=10,
-                                text=labels[r][c], image=images[1], height=180, width=180)
+                                 image=images[1], height=180, width=180)
                 game[r][c] = 1
                 counter += 1
             else:
                 button = Button(root, width=10, height=5, padx=10,
-                                text=labels[r][c], command=tkk)
+                                 command=tkk)
 
             button['font'] = myFont
 
